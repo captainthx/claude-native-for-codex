@@ -8,6 +8,20 @@ MARKETPLACE = ROOT / ".agents/plugins/marketplace.json"
 PLUGIN = ROOT / "plugins/claude-native-for-codex"
 MANIFEST = PLUGIN / ".codex-plugin/plugin.json"
 EXPECTED_NAME = "claude-native-for-codex"
+REVIEW_SKILLS = {
+    "claude-review": (
+        "claude -p",
+        "--output-format json",
+        "--permission-mode plan",
+        "--tools",
+    ),
+    "claude-adversarial-review": (
+        "claude -p",
+        "--output-format json",
+        "--permission-mode plan",
+        "--tools",
+    ),
+}
 
 
 def load_json(path: Path) -> dict:
@@ -44,9 +58,26 @@ def check_package() -> None:
     assert "mcpServers" not in manifest
 
 
+def check_skill(name: str, required_tokens) -> None:
+    path = PLUGIN / "skills" / name / "SKILL.md"
+    if not path.is_file():
+        raise AssertionError(f"missing file: {path.relative_to(ROOT)}")
+    text = path.read_text(encoding="utf-8")
+    assert text.startswith("---\n")
+    assert f"\nname: {name}\n" in text
+    for token in required_tokens:
+        assert token in text, f"{name} missing command token: {token}"
+
+
+def check_review_skills() -> None:
+    for name, tokens in REVIEW_SKILLS.items():
+        check_skill(name, tokens)
+
+
 def main() -> int:
     try:
         check_package()
+        check_review_skills()
     except (AssertionError, KeyError, json.JSONDecodeError) as error:
         print(f"FAIL: {error}")
         return 1
