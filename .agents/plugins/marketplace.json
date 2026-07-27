@@ -1,0 +1,20 @@
+{
+  "name": "claude-native-for-codex",
+  "interface": {
+    "displayName": "Claude Native for Codex"
+  },
+  "plugins": [
+    {
+      "name": "claude-native-for-codex",
+      "source": {
+        "source": "local",
+        "path": "./plugins/claude-native-for-codex"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
