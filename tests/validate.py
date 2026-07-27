@@ -147,6 +147,8 @@ def check_docs_and_ci() -> None:
     assert "codex plugin marketplace add ." in readme
     assert "codex plugin add claude-native-for-codex@claude-native-for-codex" in readme
     assert "python3 tests/validate.py" in readme
+    assert "$claude-delegate --model opus --effort high" in readme
+    assert "Sonnet at high effort" in readme
     assert "python3 tests/validate.py" in workflow
 
 

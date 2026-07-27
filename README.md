@@ -48,11 +48,15 @@ $claude-review
 $claude-review --base main
 $claude-adversarial-review --base main inspect race conditions and rollback safety
 $claude-delegate investigate the flaky integration test
+$claude-delegate implement the Codex plan above
+$claude-delegate --model opus --effort high implement the Codex plan above
 $claude-status
 $claude-result 7c5dcf5d
 $claude-cancel 7c5dcf5d
 $claude-resume 7c5dcf5d summarize the final changes
 ```
+
+`$claude-delegate` defaults to Sonnet at high effort. Use `--model` and/or `--effort` before the task to override one delegated session. A resumed session retains its original model; to switch it, run `claude attach <short-id>`, use `/model`, then resume it.
 
 Delegated work uses Claude's native background supervisor. If a session is blocked on input or permission, run:
 
