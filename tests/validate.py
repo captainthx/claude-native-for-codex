@@ -22,6 +22,13 @@ REVIEW_SKILLS = {
         "--tools",
     ),
 }
+LIFECYCLE_SKILLS = {
+    "claude-delegate": ("claude --bg",),
+    "claude-status": ("claude agents --json --all --cwd",),
+    "claude-result": ("claude logs",),
+    "claude-cancel": ("claude stop",),
+    "claude-resume": ("claude agents --json --all --cwd", "claude -p", "--resume"),
+}
 
 
 def load_json(path: Path) -> dict:
@@ -74,10 +81,16 @@ def check_review_skills() -> None:
         check_skill(name, tokens)
 
 
+def check_lifecycle_skills() -> None:
+    for name, tokens in LIFECYCLE_SKILLS.items():
+        check_skill(name, tokens)
+
+
 def main() -> int:
     try:
         check_package()
         check_review_skills()
+        check_lifecycle_skills()
     except (AssertionError, KeyError, json.JSONDecodeError) as error:
         print(f"FAIL: {error}")
         return 1
