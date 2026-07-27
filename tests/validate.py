@@ -24,7 +24,13 @@ EXPECTED_SKILLS = {
         "--permission-mode plan",
         "--tools",
     ),
-    "claude-delegate": ("claude --bg",),
+    "claude-delegate": (
+        "claude --bg",
+        "--model <alias-or-name>",
+        "--effort <low|medium|high|xhigh|max>",
+        "claude --bg --model sonnet --effort high",
+        "Reject repeated flags, missing values, unknown flags, invalid effort values, and an empty task",
+    ),
     "claude-status": ("claude agents --json --all --cwd",),
     "claude-result": ("claude logs",),
     "claude-cancel": ("claude stop",),
@@ -113,6 +119,11 @@ def check_skills() -> None:
     for review_name in ("claude-review", "claude-adversarial-review"):
         text = read_text(skills_root / review_name / "SKILL.md")
         assert "Do not expose `Edit`, `Write`" in text
+
+    resume = read_text(skills_root / "claude-resume" / "SKILL.md")
+    assert "does not accept model or effort flags" in resume
+    assert "claude attach <short-id>" in resume
+    assert "/model <alias-or-name>" in resume
 
 
 def check_no_custom_runtime() -> None:
