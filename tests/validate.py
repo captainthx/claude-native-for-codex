@@ -153,9 +153,14 @@ def check_docs_and_ci() -> None:
     workflow = read_text(WORKFLOW)
     assert "Claude Code 2.1.206" in readme
     assert "codex plugin marketplace add ." in readme
-    assert "codex plugin add claude-native-for-codex@claude-native-for-codex" in readme
+    assert "codex plugin add claude@claude-native-for-codex" in readme
     assert "python3 tests/validate.py" in readme
-    assert "$claude-delegate --model opus --effort high" in readme
+    for name in EXPECTED_SKILLS:
+        assert f"@claude:{name}" in readme
+        assert f"$claude:{name}" in readme
+    assert "$claude-" not in readme
+    assert "claude-native-for-codex@claude-native-for-codex" not in readme
+    assert "--permission-mode auto" in readme
     assert "Sonnet at high effort" in readme
     assert "python3 tests/validate.py" in workflow
 
