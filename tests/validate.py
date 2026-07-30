@@ -118,6 +118,12 @@ def check_skills() -> None:
         for banned in BANNED_SKILL_TEXT:
             assert banned not in lowered, f"{name} contains banned permission text: {banned}"
 
+    delegate = read_text(skills_root / "delegate" / "SKILL.md")
+    permission_modes = re.findall(r"--permission-mode\s+(\S+)", delegate)
+    assert permission_modes and all(mode == "auto" for mode in permission_modes), (
+        f"delegate permission modes must all be auto: {permission_modes}"
+    )
+
     for review_name in ("review", "adversarial-review"):
         text = read_text(skills_root / review_name / "SKILL.md")
         assert "Do not expose `Edit`, `Write`" in text
