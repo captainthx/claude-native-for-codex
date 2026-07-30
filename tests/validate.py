@@ -158,8 +158,8 @@ def check_docs_and_ci() -> None:
     for name in EXPECTED_SKILLS:
         assert f"@claude:{name}" in readme
         assert f"$claude:{name}" in readme
+        assert f"@claude-{name}" not in readme
     assert "@claude:delegate --model opus" in readme
-    assert not re.search(r"(?m)^@claude-", readme)
     assert "$claude-" not in readme
     assert "claude-native-for-codex@claude-native-for-codex" not in readme
     assert "--permission-mode auto" in readme

@@ -302,7 +302,7 @@ codex plugin add claude@claude-native-for-codex
 Change every active Codex example to the `$claude:<skill>` form. Add this app example before the Codex examples:
 
 ```text
-@claude:delegate แล้วใช้ security-review หน่อย opus นะ
+@claude:delegate --model opus แล้วใช้ security-review หน่อย
 ```
 
 Describe delegate behavior with:
