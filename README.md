@@ -46,7 +46,7 @@ Codex also accepts a public GitHub `owner/repo` slug or HTTPS Git URL as the mar
 ## Usage
 
 ```text
-@claude:delegate แล้วใช้ security-review หน่อย opus นะ
+@claude:delegate --model opus แล้วใช้ security-review หน่อย
 
 $claude:review
 $claude:review --base main

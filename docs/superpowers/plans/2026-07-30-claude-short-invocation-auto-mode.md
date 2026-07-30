@@ -326,7 +326,7 @@ Run:
 ```bash
 python3 tests/validate.py
 git diff --check
-rg -n '\$claude-|claude-native-for-codex@claude-native-for-codex' README.md plugins/claude-native-for-codex tests/validate.py
+rg -n '\$claude-|claude-native-for-codex@claude-native-for-codex' README.md plugins/claude-native-for-codex
 ```
 
 Expected:
