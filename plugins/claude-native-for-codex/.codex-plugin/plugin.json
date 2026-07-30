@@ -1,6 +1,6 @@
 {
-  "name": "claude-native-for-codex",
-  "version": "0.1.0",
+  "name": "claude",
+  "version": "0.2.0",
   "description": "Use Claude Code from Codex through Claude's native CLI and background-agent lifecycle.",
   "author": {
     "name": "Claude Native for Codex contributors"
@@ -14,7 +14,7 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Claude Native for Codex",
+    "displayName": "Claude",
     "shortDescription": "Review and delegate Codex work to Claude Code.",
     "longDescription": "Use Claude Code from Codex for read-only reviews and native background task delegation without a custom runtime.",
     "developerName": "Claude Native for Codex contributors",

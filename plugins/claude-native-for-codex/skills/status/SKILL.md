@@ -1,9 +1,9 @@
 ---
-name: claude-status
+name: status
 description: Show native Claude Code background sessions for the current Git workspace.
 ---
 
-# Claude Status
+# Status
 
 List Claude-managed sessions without reading plugin-owned state.
 

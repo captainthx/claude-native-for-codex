@@ -10,31 +10,33 @@ PLUGIN = ROOT / "plugins/claude-native-for-codex"
 MANIFEST = PLUGIN / ".codex-plugin/plugin.json"
 README = ROOT / "README.md"
 WORKFLOW = ROOT / ".github/workflows/validate.yml"
-EXPECTED_NAME = "claude-native-for-codex"
+EXPECTED_MARKETPLACE_NAME = "claude-native-for-codex"
+EXPECTED_NAME = "claude"
+EXPECTED_VERSION = "0.2.0"
 EXPECTED_SKILLS = {
-    "claude-review": (
+    "review": (
         "claude -p",
         "--output-format json",
         "--permission-mode plan",
         "--tools",
     ),
-    "claude-adversarial-review": (
+    "adversarial-review": (
         "claude -p",
         "--output-format json",
         "--permission-mode plan",
         "--tools",
     ),
-    "claude-delegate": (
-        "claude --bg",
+    "delegate": (
+        "claude --bg --permission-mode auto",
         "--model <alias-or-name>",
         "--effort <low|medium|high|xhigh|max>",
-        "claude --bg --model sonnet --effort high",
+        "claude --bg --permission-mode auto --model sonnet --effort high",
         "Reject repeated flags, missing values, unknown flags, invalid effort values, and an empty task",
     ),
-    "claude-status": ("claude agents --json --all --cwd",),
-    "claude-result": ("claude logs",),
-    "claude-cancel": ("claude stop",),
-    "claude-resume": (
+    "status": ("claude agents --json --all --cwd",),
+    "result": ("claude logs",),
+    "cancel": ("claude stop",),
+    "resume": (
         "claude agents --json --all --cwd",
         "claude -p",
         "--resume",
@@ -73,7 +75,7 @@ def check_package() -> None:
     marketplace = load_json(MARKETPLACE)
     manifest = load_json(MANIFEST)
 
-    assert marketplace["name"] == EXPECTED_NAME
+    assert marketplace["name"] == EXPECTED_MARKETPLACE_NAME
     assert marketplace["interface"]["displayName"] == "Claude Native for Codex"
     assert len(marketplace["plugins"]) == 1
 
@@ -90,10 +92,10 @@ def check_package() -> None:
     assert entry["category"] == "Productivity"
 
     assert manifest["name"] == EXPECTED_NAME
-    assert manifest["version"] == "0.1.0"
+    assert manifest["version"] == EXPECTED_VERSION
     assert manifest["skills"] == "./skills/"
     assert manifest["license"] == "MIT"
-    assert manifest["interface"]["displayName"] == "Claude Native for Codex"
+    assert manifest["interface"]["displayName"] == "Claude"
     assert len(manifest["interface"]["defaultPrompt"]) <= 3
     assert (ROOT / "LICENSE").is_file()
     assert "apps" not in manifest
@@ -116,11 +118,11 @@ def check_skills() -> None:
         for banned in BANNED_SKILL_TEXT:
             assert banned not in lowered, f"{name} contains banned permission text: {banned}"
 
-    for review_name in ("claude-review", "claude-adversarial-review"):
+    for review_name in ("review", "adversarial-review"):
         text = read_text(skills_root / review_name / "SKILL.md")
         assert "Do not expose `Edit`, `Write`" in text
 
-    resume = read_text(skills_root / "claude-resume" / "SKILL.md")
+    resume = read_text(skills_root / "resume" / "SKILL.md")
     assert "does not accept model or effort flags" in resume
     assert "claude attach <short-id>" in resume
     assert "/model <alias-or-name>" in resume

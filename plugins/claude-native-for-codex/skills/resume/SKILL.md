@@ -1,9 +1,9 @@
 ---
-name: claude-resume
+name: resume
 description: Continue a native Claude Code session in foreground print mode.
 ---
 
-# Claude Resume
+# Resume
 
 Resolve a native session and return its follow-up answer directly to Codex.
 
@@ -39,8 +39,8 @@ Pass the session ID and follow-up as separate shell-escaped arguments. Never eva
 
 ## Model and effort
 
-`$claude-resume` does not accept model or effort flags. Claude Code preserves the model selected by the saved session when resuming. To change it, direct the user to `claude attach <short-id>`, use `/model <alias-or-name>` there, then resume normally.
+`$claude:resume` does not accept model or effort flags. Claude Code preserves the model selected by the saved session when resuming. To change it, direct the user to `claude attach <short-id>`, use `/model <alias-or-name>` there, then resume normally.
 
 ## Scope
 
-Resume runs in foreground for version `0.1.0`. Do not add background continuation or a plugin-owned session record.
+Resume runs in foreground for version `0.2.0`. Do not add background continuation or a plugin-owned session record.

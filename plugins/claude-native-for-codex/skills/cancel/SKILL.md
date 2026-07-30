@@ -1,9 +1,9 @@
 ---
-name: claude-cancel
+name: cancel
 description: Stop one exact native Claude Code background session.
 ---
 
-# Claude Cancel
+# Cancel
 
 Stop one session without deleting its transcript or worktree.
 

@@ -1,15 +1,15 @@
 ---
-name: claude-review
+name: review
 description: Ask Claude Code for a read-only review of the working tree or a branch diff.
 ---
 
-# Claude Review
+# Review
 
 Run a findings-first Claude Code review without modifying files.
 
 ## Input
 
-Accept either no arguments or exactly `--base <git-ref>`. Reject unknown flags and extra focus text; focused challenge reviews belong to `$claude-adversarial-review`.
+Accept either no arguments or exactly `--base <git-ref>`. Reject unknown flags and extra focus text; focused challenge reviews belong to `$claude:adversarial-review`.
 
 ## Procedure
 

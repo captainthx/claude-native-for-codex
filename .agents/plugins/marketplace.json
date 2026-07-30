@@ -5,7 +5,7 @@
   },
   "plugins": [
     {
-      "name": "claude-native-for-codex",
+      "name": "claude",
       "source": {
         "source": "local",
         "path": "./plugins/claude-native-for-codex"

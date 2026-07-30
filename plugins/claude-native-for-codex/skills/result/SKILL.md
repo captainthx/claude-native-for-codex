@@ -1,9 +1,9 @@
 ---
-name: claude-result
+name: result
 description: Read the captured output of one native Claude Code background session.
 ---
 
-# Claude Result
+# Result
 
 Return native Claude output without copying it into a plugin store.
 

@@ -1,9 +1,9 @@
 ---
-name: claude-adversarial-review
+name: adversarial-review
 description: Ask Claude Code to challenge an implementation and its design assumptions without editing files.
 ---
 
-# Claude Adversarial Review
+# Adversarial Review
 
 Pressure-test the current implementation while remaining read-only.
 
