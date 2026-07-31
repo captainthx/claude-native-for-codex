@@ -30,18 +30,24 @@ claude --version
 claude auth status
 ```
 
-## Install from a checkout
+## Install
 
-From this repository root:
+Install from GitHub:
 
 ```bash
-codex plugin marketplace add .
+codex plugin marketplace add captainthx/claude-native-for-codex
 codex plugin add claude@claude-native-for-codex
 ```
 
 Start a new Codex task after installation.
 
-Codex also accepts a public GitHub `owner/repo` slug or HTTPS Git URL as the marketplace source.
+For local development, run `codex plugin marketplace add .` from this repository root instead.
+
+To update an existing installation:
+
+```bash
+codex plugin marketplace upgrade claude-native-for-codex
+```
 
 ## Usage
 
@@ -94,6 +100,21 @@ Use a disposable Git repository and verify:
 3. Result returns native output.
 4. Cancel stops one running session.
 5. Resume continues a completed session in foreground.
+
+## Releases and discovery
+
+Installing from this public GitHub repository works now. A GitHub release is optional: it gives users a changelog and a stable version marker, but the marketplace installs the repository's selected Git ref.
+
+For each release, update the version in `plugins/claude-native-for-codex/.codex-plugin/plugin.json`, validate it, then tag and publish it:
+
+```bash
+python3 tests/validate.py
+git tag v0.2.0
+git push origin main --tags
+gh release create v0.2.0 --generate-notes
+```
+
+To be searchable in the public Plugins Directory shared by ChatGPT and Codex, submit this skills-only plugin through the [OpenAI plugin submission portal](https://platform.openai.com/plugins). Before submitting, prepare a verified developer identity, Apps Management write access, a logo, public website/support/privacy-policy/terms URLs, five positive and three negative test cases, and release notes. OpenAI review and publication are required; making the GitHub repository public alone does not add it to that directory. See the [official submission guide](https://developers.openai.com/plugins/deploy/submission).
 
 ## License
 
